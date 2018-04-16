@@ -38,12 +38,12 @@ namespace ICanPay.Wechatpay
         /// </summary>
         [ReName(Name = Constant.TOTAL_FEE)]
         [Necessary(GatewayAuxiliaryType.Refund)]
-        public double Amount
+        public double? Amount
         {
             get => _amount;
             set => _amount = value * 100;
         }
-        private double _amount;
+        private double? _amount;
 
         /// <summary>
         /// 退款金额,单位元
@@ -66,7 +66,7 @@ namespace ICanPay.Wechatpay
         /// <summary>
         /// 货币种类	
         /// </summary>
-        public string RefundFeeType { get; set; } = Constant.CNY;
+        public string RefundFeeType { get; set; }// = Constant.CNY;
 
         /// <summary>
         /// 退款原因
@@ -88,7 +88,7 @@ namespace ICanPay.Wechatpay
         /// <summary>
         /// 偏移量，当部分退款次数超过10次时可使用，表示返回的查询结果从这个偏移量开始取记录
         /// </summary>
-        public int Offset { get; set; }
+        public int? Offset { get; set; }
 
         /// <summary>
         /// 对账单日期，下载对账单的日期，格式：20140603

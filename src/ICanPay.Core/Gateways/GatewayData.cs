@@ -80,7 +80,8 @@ namespace ICanPay.Core
 
             if (value is null || string.IsNullOrEmpty(value.ToString()))
             {
-                throw new ArgumentNullException("value", "参数值不能为空");
+                //throw new ArgumentNullException("value", "参数值不能为空");
+                return false;
             }
 
             if (Exists(key))
@@ -105,8 +106,8 @@ namespace ICanPay.Core
         {
             _originalResult = null;
             var type = obj.GetType();
-            var properties = type.GetProperties();
-            var fields = type.GetFields();
+            var properties = type.GetProperties().Where(a => a.GetValue(obj) != null).ToArray();
+            var fields = type.GetFields().Where(a => a.GetValue(obj) != null).ToArray();
 
             Add(properties);
             Add(fields);
@@ -357,7 +358,7 @@ namespace ICanPay.Core
         /// <returns></returns>
         public string ToUrl(bool isUrlEncode = true)
         {
-            return string.Join("&", 
+            return string.Join("&",
                 _values
                 .Select(a => $"{a.Key}={(isUrlEncode ? WebUtility.UrlEncode(a.Value.ToString()) : a.Value.ToString())}"));
         }

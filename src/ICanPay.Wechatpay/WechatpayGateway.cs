@@ -577,6 +577,18 @@ namespace ICanPay.Wechatpay
             string result = null;
             Task.Run(async () =>
             {
+                //var arr = new[] { "offset", "refund_fee_type", "total_fee" };
+
+                //foreach (var key in arr)
+                //{
+                //    if (GatewayData.Exists(key))
+                //    {
+                //        GatewayData.Remove(key);
+                //    }
+                //}
+                //GatewayData.Add(Constant.SIGN, BuildSign());
+
+
                 result = await HttpUtil
                 .PostAsync(RequestUrl, GatewayData.ToXml(), cert);
             })
